@@ -4,7 +4,7 @@
   </script>
   
   <svelte:head>
-    <title>SvelteKit Auth</title>
+    <title>Octun</title>
   </svelte:head>
 
   <div class="navbar bg-base-100">
@@ -14,8 +14,10 @@
     {/if}
   
     {#if $page.data.user}
-      <a class="btn btn-ghost normal-case text-xl" href="/admin">Admin</a>
-  
+    {#if $page.data.user.role === 'ADMIN'}
+    <a class="btn btn-ghost normal-case text-xl" href="/admin">Admin</a>
+    {/if}
+    
       <form action="/logout" method="POST">
         <button type="submit" class="btn btn-ghost normal-case text-xl">Logout</button>
       </form>
