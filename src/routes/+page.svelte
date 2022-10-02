@@ -1,19 +1,26 @@
 <script lang="ts">
     import { page } from '$app/stores'
-</script>
 
+    export let data;
+    const {products} = data;
+    console.log(products)
+</script>
+<div class="grid grid-cols-4 gap-2">
 {#if $page.data.user}
-<div class="card lg:card-side bg-base-100 shadow-xl">
-    <figure><img src="https://placeimg.com/400/400/arch" alt="Album"/></figure>
-    <div class="card-body">
-      <h2 class="card-title">New album is released!</h2>
-      <p>Click the button to listen on Spotiwhy app.</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">Listen</button>
+    {#each products as product}
+    <div class="card card-compact w-96 bg-base-100 shadow-xl">
+      <figure><img src={product.images[0]} class="h-44" alt="Shoes" /></figure>
+      <div class="card-body">
+        <h2 class="card-title">{product.title}!</h2>
+        <p>{product.description}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Buy Now</button>
+        </div>
       </div>
     </div>
-  </div>
+    {/each}
   {/if}
+</div>
 
 
 {#if !$page.data.user}

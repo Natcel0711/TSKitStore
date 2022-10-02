@@ -14,9 +14,9 @@
     {/if}
   
     {#if $page.data.user}
-    {#if $page.data.user.role === 'ADMIN'}
-    <a class="btn btn-ghost normal-case text-xl" href="/admin">Admin</a>
-    {/if}
+      {#if $page.data.user.role === 'ADMIN'}
+      <a class="btn btn-ghost normal-case text-xl" href="/admin">Admin</a>
+      {/if}
     
       <form action="/logout" method="POST">
         <button type="submit" class="btn btn-ghost normal-case text-xl">Logout</button>
