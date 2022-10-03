@@ -1,5 +1,4 @@
 import type {PageServerLoad} from './$types'
-import fetch from 'node-fetch';
 
 export const load: PageServerLoad = async ({ locals }) => {
     const fetchProducts = async () => {
