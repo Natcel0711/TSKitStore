@@ -1,6 +1,7 @@
 import type {PageServerLoad} from './$types';
 import type { Action, Actions } from './$types'
 import {db} from "$lib/database"
+import { invalid } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
     const fetchProducts = async () => {
@@ -20,8 +21,32 @@ export const load: PageServerLoad = async ({ locals }) => {
     const description = data.get('description')
     const image = data.get('image')
     const id = data.get('id')
-
+    const username = data.get('username')
+    const price = data.get('price')
+    console.log(typeof title, typeof description, typeof image, typeof id, typeof username, typeof price)
     
+    if(typeof title !== 'string' ||typeof description !== 'string' ||typeof image !== 'string' ||typeof id !== 'string' ||typeof username !== 'string' || typeof price !== 'string'){
+        return invalid(400, {user:true})
+    }
+    const user = await db.user.findUnique({
+        where: { username },
+      })
+      
+      if (!user) {
+        return invalid(400, { user: true })
+      }
+    await db.items.create({
+        data:{
+            name:title,
+            description:description,
+            image:image,
+            price:+price,
+            rating:1,
+            stock:10,
+            user:{connect: {id:user?.id}}
+        },
+    })
+
 }
 
 export const actions: Actions = { addtocart }

@@ -34,8 +34,8 @@ model Items{
   description String
   price Float
   image String
-  rating Float
-  stock Int
+  rating Float?
+  stock Int?
 
   user User @relation(fields: [userid], references: [id])
   userid String
