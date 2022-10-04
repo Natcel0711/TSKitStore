@@ -18,10 +18,25 @@ model User {
 
   role   Roles @relation(fields: [roleId], references: [id])
   roleId Int
+
+  items Items[]
 }
 
 model Roles {
   id   Int    @id @default(autoincrement())
   name String @unique
   User User[]
+}
+
+model Items{
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  price Float
+  image String
+  rating Float
+  stock Int
+
+  user User @relation(fields: [userid], references: [id])
+  userid String
 }

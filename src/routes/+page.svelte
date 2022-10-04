@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-  import {ModalProduct} from "../lib/models/ModalModel"
-  let producto:ModalProduct = new ModalProduct("Test", "Test", "Test");
+	import { ModalProduct } from '../lib/models/ModalModel';
+	let producto: ModalProduct = new ModalProduct();
 	export let data;
 	const { products } = data;
-
-  function MapProductModal(id:number){
-    for (let i = 0; i < products.length; i++) {
-      if(products[i].id == id ){
-        producto = new ModalProduct(products[i].title,products[i].description,products[i].images[0]);
-      }
-    }
-  }
+	function MapProductModal(id: number) {
+		for (let i = 0; i < products.length; i++) {
+			if (products[i].id == id) {
+				producto.title = products[i].title;
+				producto.description = products[i].description;
+				producto.image = products[i].images[0];
+			}
+		}
+	}
 </script>
 
 {#if $page.data.user}
@@ -58,13 +59,13 @@
 {/if}
 
 <div class="modal" id="my-modal-2">
-  <div class="modal-box p-12">
-    <a href="#" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
-    <img src={producto.image} alt={producto.description}/>
-    <h3 class="font-bold text-lg">{producto.title}!</h3>
-    <p class="py-4">{producto.description}!</p>
-    <div class="modal-action">
-     <a href="#" class="btn">Add to cart!</a>
-    </div>
-  </div>
+	<div class="modal-box p-12">
+		<a href="#" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
+		<img src={producto.image} alt={producto.description} />
+		<h3 class="font-bold text-lg">{producto.title}!</h3>
+		<p class="py-4">{producto.description}!</p>
+		<div class="modal-action">
+			<a href="#" class="btn">Add to cart!</a>
+		</div>
+	</div>
 </div>
