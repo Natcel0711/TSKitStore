@@ -4,9 +4,11 @@
 	let producto: ModalProduct = new ModalProduct();
 	export let data;
 	const { products } = data;
+	console.log(products)
 	function MapProductModal(id: number) {
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].id == id) {
+				producto.id = products[i].id;
 				producto.title = products[i].title;
 				producto.description = products[i].description;
 				producto.image = products[i].images[0];
@@ -59,13 +61,19 @@
 {/if}
 
 <div class="modal" id="my-modal-2">
+	<form action="?/addtocart" method="post">
+		<input id="id" value={producto.id} name="id" class="hidden" type="text">
+		<input id="title" value={producto.title} name="title" class="hidden" type="text">
+		<input id="description" value={producto.description} name="description" class="hidden" type="text">
+		<input id="image" value={producto.image} name="image" class="hidden" type="text">
 	<div class="modal-box p-12">
 		<a href="#" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
 		<img src={producto.image} alt={producto.description} />
 		<h3 class="font-bold text-lg">{producto.title}!</h3>
-		<p class="py-4">{producto.description}!</p>
+		<p  class="py-4">{producto.description}!</p>
 		<div class="modal-action">
-			<a href="#" class="btn">Add to cart!</a>
+			<button type="submit" class="btn">Add to cart!</button>
 		</div>
 	</div>
+	</form>
 </div>
