@@ -11,16 +11,6 @@
 				categories.push(items[i].category)
 			}
 		}
-		let string;
-		for (let i = 0; i < categories.length; i++) {
-			string = string +  "\n \n" + categories[i] + " \n";
-			for (let j = 0; j < items.length; j++) {
-				if(categories[i] == items[j].category){
-					string = string + "\t-" + items[j].title + "\n";
-				}
-			}
-		}
-		console.log(string)
 	}
 	function MapProductModal(id: number) {
 		for (let i = 0; i < products.length; i++) {
