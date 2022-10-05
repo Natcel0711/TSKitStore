@@ -2,20 +2,43 @@
 	export let data;
 	const { items } = data;
 </script>
+
 <div>
-	<h1 class="text-7xl font-mono">Cart Items</h1>
+	<h1 class="text-7xl font-mono m-4">Cart Items</h1>
 </div>
-<div class="stats stats-vertical shadow">
-	{#each items as item}
-		<div class="stat">
-			<div class="place-self-center">
-				<img src={item.image}>
-			</div>
-			<div class="stat-title">{item.name}</div>
-			<div class="stat-value">${item.price}</div>
-			<div class="stat-desc">{item.description}</div>
-		</div>
-	{/each}
+<div class="overflow-x-auto m-10">
+	<table class="table w-full">
+		<tbody>
+			{#each items as item}
+				<tr>
+					<th><img src={item.image} alt={item.description} /></th>
+					<td>{item.name}</td>
+					<td>{item.description}</td>
+					<td>${item.price}</td>
+					<td>
+						<form action="?/removeItem" method="POST">
+							<input id="id" value={item.id} name="id" class="hidden" type="text">
+							<button class="btn btn-square">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M6 18L18 6M6 6l12 12"
+									/></svg
+								>
+							</button>
+						</form>
+					</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>
 <div>
 	<a class="btn btn-square w-32 m-4" href="/">Back</a>

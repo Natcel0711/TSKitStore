@@ -5,7 +5,7 @@ import { invalid } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
     const fetchProducts = async () => {
-        const productRes = await fetch('https://dummyjson.com/products?limit=10');
+        const productRes = await fetch('https://dummyjson.com/products?limit=30');
         const productData = await productRes.json();
         return productData.products;
     }
