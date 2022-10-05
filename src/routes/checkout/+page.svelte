@@ -4,7 +4,7 @@
 </script>
 
 <div>
-	<h1 class="text-7xl font-mono m-4">Cart Items</h1>
+	<h1 class="text-7xl font-sans m-4">Cart Items</h1>
 </div>
 <div class="overflow-x-auto m-10">
 	<table class="table w-full">
@@ -12,9 +12,9 @@
 			{#each items as item}
 				<tr>
 					<th><img src={item.image} alt={item.description} /></th>
-					<td>{item.name}</td>
-					<td>{item.description}</td>
-					<td>${item.price}</td>
+					<td class="text-3xl text-primary">{item.name}</td>
+					<td class="">{item.description}</td>
+					<td class="text-3xl text-primary">${item.price}</td>
 					<td>
 						<form action="?/removeItem" method="POST">
 							<input id="id" value={item.id} name="id" class="hidden" type="text">

@@ -3,7 +3,25 @@
 	import { ModalProduct } from '$lib/models/ModalModel';
 	let producto: ModalProduct = new ModalProduct();
 	export let data;
+	let categories:any = [];
 	const { products } = data;
+	async function GetCategories(items:any){
+		for (let i = 0; i < items.length; i++) {
+			if(!categories.includes(items[i].category)){
+				categories.push(items[i].category)
+			}
+		}
+		let string;
+		for (let i = 0; i < categories.length; i++) {
+			string = string +  "\n \n" + categories[i] + " \n";
+			for (let j = 0; j < items.length; j++) {
+				if(categories[i] == items[j].category){
+					string = string + "\t-" + items[j].title + "\n";
+				}
+			}
+		}
+		console.log(string)
+	}
 	function MapProductModal(id: number) {
 		for (let i = 0; i < products.length; i++) {
 			if (products[i].id == id) {
@@ -15,32 +33,40 @@
 			}
 		}
 	}
+	GetCategories(products)
 </script>
 
 {#if $page.data.user}
 	<div class="bg-white">
 		<div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 			<h2 class="sr-only">Products</h2>
-
+			{#each categories as cat}
+			<h1 class="text-6xl mb-10">{cat}</h1>
 			<div
 				class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
 			>
-				{#each products as product}
-					<a href="#my-modal-2" on:click={() => MapProductModal(product.id)} class="group">
-						<div
-							class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8"
-						>
-							<img
-								src={product.images[0]}
-								alt={product.description}
-								class="h-60 w-full object-cover object-center group-hover:opacity-75"
-							/>
-						</div>
-						<h3 class="mt-4 text-sm text-gray-700">{product.title}</h3>
-						<p class="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
-					</a>
+			
+				 
+				 {#each products as product}
+				 {#if cat == product.category}
+				 <a href="#my-modal-2" on:click={() => MapProductModal(product.id)} class="group">
+					<div
+						class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8"
+					>
+						<img
+							src={product.images[0]}
+							alt={product.description}
+							class="h-60 w-full object-cover object-center group-hover:opacity-75"
+						/>
+					</div>
+					<h3 class="mt-4 text-sm text-gray-700">{product.title}</h3>
+					<p class="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
+				</a>
+				 {/if}
 				{/each}
+			
 			</div>
+			{/each}
 		</div>
 	</div>
 {/if}
