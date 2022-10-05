@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals }) => {
     const id = data.get('id')
     const username = data.get('username')
     const price = data.get('price')
-    console.log(typeof title, typeof description, typeof image, typeof id, typeof username, typeof price)
+    
     
     if(typeof title !== 'string' ||typeof description !== 'string' ||typeof image !== 'string' ||typeof id !== 'string' ||typeof username !== 'string' || typeof price !== 'string'){
         return invalid(400, {user:true})

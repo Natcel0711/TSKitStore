@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { ModalProduct } from '../lib/models/ModalModel';
+	import { ModalProduct } from '$lib/models/ModalModel';
 	let producto: ModalProduct = new ModalProduct();
 	export let data;
 	const { products } = data;
@@ -80,3 +80,8 @@
 	</div>
 	</form>
 </div>
+<footer class="footer footer-center p-4 bg-neutral text-slate-200">
+    <div>
+      <p>OCTUN</p>
+    </div>
+  </footer>

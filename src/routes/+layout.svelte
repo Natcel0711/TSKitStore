@@ -1,17 +1,16 @@
 <script lang="ts">
     import { page } from '$app/stores';
+    import type {Checkout} from "$models/Product"
     import "../app.css";
     export let data;
-    console.log(data.Cart)
 
     let total:number = 0;
     let itemscount:number = 0;
 
-    async function CartTotal(items:Array<object>){
+    async function CartTotal(items:Array<Checkout>){
       for (let i = 0; i < items.length; i++) {
         itemscount += 1;
         total = total + items[i].price;
-        console.log(total)
       }
     }
 
@@ -22,14 +21,14 @@
     <title>Octun</title>
   </svelte:head>
 
-<div class="navbar bg-base-100">
+<div class="navbar bg-neutral">
   <div class="flex-1">
     {#if $page.data.user}
     {#if $page.data.user.role === 'ADMIN'}
     <a class="btn btn-ghost normal-case text-xl" href="/admin">Admin</a>
     {/if}
     <form action="/logout" method="POST">
-      <button type="submit" class="btn btn-ghost normal-case text-xl">Logout</button>
+      <button type="submit" class="btn text-slate-300 btn-ghost normal-case text-xl">Logout</button>
     </form>
     {/if}
     {#if !$page.data.user}
@@ -51,7 +50,7 @@
           <span class="font-bold text-lg">{itemscount} Items</span>
           <span class="text-info">Subtotal: ${total}</span>
           <div class="card-actions">
-            <button class="btn btn-primary btn-block">View cart</button>
+            <a href="/checkout" class="btn btn-primary btn-block">View cart</a>
           </div>
         </div>
       </div>
@@ -80,4 +79,3 @@
   <main class="grid grid-cols-1 text-center">
     <slot />
   </main>
-  
