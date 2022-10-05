@@ -1,5 +1,6 @@
 import type {PageServerLoad} from './$types';
 import type { Action, Actions } from './$types'
+import type { Checkout } from '$lib/models/Product';
 import {db} from "$lib/database"
 import { invalid } from '@sveltejs/kit';
 
@@ -14,18 +15,12 @@ export const load: PageServerLoad = async ({ locals }) => {
         products:fetchProducts()
     }
   }
-
   export const addtocart: Action = async ({ request }) => {
     const data = await request.formData()
-    const title = data.get('title')
-    const description = data.get('description')
-    const image = data.get('image')
-    const id = data.get('id')
+    let item:Checkout = await MapData(data);
     const username = data.get('username')
-    const price = data.get('price')
     
-    
-    if(typeof title !== 'string' ||typeof description !== 'string' ||typeof image !== 'string' ||typeof id !== 'string' ||typeof username !== 'string' || typeof price !== 'string'){
+    if(typeof item.name !== 'string' ||typeof item.description !== 'string' ||typeof item.image !== 'string' ||typeof item.id !== 'string' ||typeof username !== 'string' || typeof item.price !== 'string'){
         return invalid(400, {user:true})
     }
     const user = await db.user.findUnique({
@@ -37,16 +32,30 @@ export const load: PageServerLoad = async ({ locals }) => {
       }
     await db.items.create({
         data:{
-            name:title,
-            description:description,
-            image:image,
-            price:+price,
-            rating:1,
-            stock:10,
+            name:item.name,
+            description:item.description,
+            image:item.image,
+            price:+item.price,
+            rating:item.rating,
+            stock:item.stock,
             user:{connect: {id:user?.id}}
         },
     })
 
+}
+
+async function MapData(data:any){
+    let product:Checkout = {
+        name: data.get('title'),
+        description: data.get('description'),
+        image: data.get('image'),
+        id: data.get('id'),
+        price: data.get('price'),
+        stock: 10,
+        rating:5,
+        userid:""
+    }
+    return product;
 }
 
 export const actions: Actions = { addtocart }
