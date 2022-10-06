@@ -69,7 +69,6 @@
         <li>
           <a href="/" class="justify-between">
             Profile
-            <span class="badge">New</span>
           </a>
         </li>
         <li><a href="/">Settings</a></li>
