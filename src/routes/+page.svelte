@@ -85,6 +85,7 @@
 		<input id="description" value={producto.description} name="description" class="hidden" type="text">
 		<input id="image" value={producto.image} name="image" class="hidden" type="text">
 	<div class="modal-box p-12">
+		<!-- svelte-ignore a11y-invalid-attribute -->
 		<a href="#" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
 		<img src={producto.image} alt={producto.description} />
 		<h3 class="font-bold text-lg">{producto.title}!</h3>
