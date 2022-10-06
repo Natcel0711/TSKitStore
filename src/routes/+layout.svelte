@@ -8,9 +8,11 @@
     let itemscount:number = 0;
 
     async function CartTotal(items:Array<Checkout>){
-      for (let i = 0; i < items.length; i++) {
+      if(items !== undefined){
+        for (let i = 0; i < items.length; i++) {
         itemscount += 1;
         total = total + items[i].price;
+      }
       }
     }
 
