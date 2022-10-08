@@ -84,8 +84,7 @@
 						{/each}
 					</tbody>
 				</table>
-				<form action="?/" method="POST">
-					<input id="id" value="" name="id" class="hidden" type="text">
+				<form action="?/Pay" method="POST">
 					<div>
 						<button class="btn bg-primary">Pay</button>
 					</div>

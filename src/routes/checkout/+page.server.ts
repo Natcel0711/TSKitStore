@@ -25,7 +25,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const removeItem:Action = async ({request})=>{
   const data = await request.formData();
   const itemid = data.get('id')
-  console.log(typeof itemid)
   if(typeof itemid !== 'string')
     return invalid(400, {user:true})
   

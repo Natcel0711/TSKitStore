@@ -36,6 +36,7 @@ model Items{
   image String
   rating Float?
   stock Int?
+  paid Boolean @default(false)
 
   user User @relation(fields: [userid], references: [id])
   userid String
