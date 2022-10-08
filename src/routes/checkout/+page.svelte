@@ -42,5 +42,5 @@
 </div>
 <div>
 	<a class="btn btn-square w-32 m-4" href="/">Back</a>
-	<a class="btn btn-square w-32 m-4" href="/">Checkout</a>
+	<a class="btn btn-square w-32 m-4" href="checkout/payment">Checkout</a>
 </div>
