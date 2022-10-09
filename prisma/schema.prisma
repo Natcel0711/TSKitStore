@@ -20,6 +20,7 @@ model User {
   roleId Int
 
   items Items[]
+  paymenthistory PaymentHistory[]
 }
 
 model Roles {
@@ -40,4 +41,13 @@ model Items{
 
   user User @relation(fields: [userid], references: [id])
   userid String
+}
+
+model PaymentHistory{
+  id String @id @default(uuid())
+
+  user User @relation(fields: [userid], references: [id])
+  userid String
+
+  itemid Int
 }
