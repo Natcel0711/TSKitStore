@@ -41,6 +41,8 @@ model Items{
 
   user User @relation(fields: [userid], references: [id])
   userid String
+
+  paymentid String?
 }
 
 model PaymentHistory{
@@ -48,6 +50,4 @@ model PaymentHistory{
 
   user User @relation(fields: [userid], references: [id])
   userid String
-
-  itemid Int
 }

@@ -38,7 +38,7 @@ export const load: PageServerLoad = async ({ locals }) => {
             price:+item.price,
             rating:item.rating,
             stock:item.stock,
-            user:{connect: {id:user?.id}}
+            user:{connect: {id:user?.id}},
         },
     })
 
