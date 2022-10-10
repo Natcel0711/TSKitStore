@@ -1,6 +1,5 @@
 <script lang="ts">
 	import PaymentReceipt from "$lib/components/PaymentReceipt.svelte";
-
 	export let data;
 	const { items } = data;
 	export let form:any;
@@ -29,7 +28,7 @@
 					</label>
 					<label class="input-group">
 						<span>#</span>
-						<input type="text" value={form?.CardNo ?? ''} name="CardNo" placeholder="4242 4242 4242 4242" class="input input-bordered"/>
+						<input pattern="[0-9\s]{'{13,19}'}" autocomplete="cc-number" required type="tel" inputmode="numeric" maxlength="16" value={form?.CardNo ?? ''} name="CardNo" placeholder="4242 4242 4242 4242" class="input input-bordered"/>
 					</label>
 				</div>
 				<div class="form-control">
@@ -38,7 +37,7 @@
 					</label>
 					<label class="input-group">
 						<span>abc</span>
-						<input name="ExpDate" value={form?.ExpDate ?? ''} type="text" placeholder="MM/YY" class="input input-bordered" />
+						<input required name="ExpDate" value={form?.ExpDate ?? ''} type="date" placeholder="MM/YY" class="input input-bordered" />
 					</label>
 				</div>
 				<div class="form-control">
@@ -47,7 +46,7 @@
 					</label>
 					<label class="input-group">
 						<span>#</span>
-						<input name="CVC" value={form?.CVC ?? ''} type="text" placeholder="CVC" class="input input-bordered" />
+						<input required name="CVC" maxlength="3" pattern="[0-9]{3}" value={form?.CVC ?? ''} type="number" placeholder="CVC" class="input input-bordered" />
 					</label>
 				</div>
 				<div class="form-control">
@@ -56,7 +55,7 @@
 					</label>
 					<label class="input-group">
 						<span>abc</span>
-						<input name="CardName" value={form?.CardName ?? ''} type="text" class="input input-bordered" />
+						<input required name="CardName" value={form?.CardName ?? ''} type="text" class="input input-bordered" />
 					</label>
 				</div>
 			</form>
