@@ -3,13 +3,13 @@
 
 	export let data;
 	const { items } = data;
-	export let form:string;
+	export let form:any;
 	console.log(form)
 	let paymentID:string = form
 
 </script>
 
-{#if form}
+{#if form?.error == false}
 	<PaymentReceipt ID={paymentID}/>
 {:else}
 {#if items.length < 1}
@@ -29,7 +29,7 @@
 					</label>
 					<label class="input-group">
 						<span>#</span>
-						<input type="text" placeholder="4242 4242 4242 4242" class="input input-bordered"/>
+						<input type="text" value={form?.CardNo ?? ''} name="CardNo" placeholder="4242 4242 4242 4242" class="input input-bordered"/>
 					</label>
 				</div>
 				<div class="form-control">
@@ -38,7 +38,7 @@
 					</label>
 					<label class="input-group">
 						<span>abc</span>
-						<input type="text" placeholder="MM/YY" class="input input-bordered" />
+						<input name="ExpDate" value={form?.ExpDate ?? ''} type="text" placeholder="MM/YY" class="input input-bordered" />
 					</label>
 				</div>
 				<div class="form-control">
@@ -47,7 +47,7 @@
 					</label>
 					<label class="input-group">
 						<span>#</span>
-						<input type="text" placeholder="CVC" class="input input-bordered" />
+						<input name="CVC" value={form?.CVC ?? ''} type="text" placeholder="CVC" class="input input-bordered" />
 					</label>
 				</div>
 				<div class="form-control">
@@ -56,7 +56,7 @@
 					</label>
 					<label class="input-group">
 						<span>abc</span>
-						<input type="text" class="input input-bordered" />
+						<input name="CardName" value={form?.CardName ?? ''} type="text" class="input input-bordered" />
 					</label>
 				</div>
 			</form>

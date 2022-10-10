@@ -78,7 +78,7 @@
 
 <div class="modal" id="my-modal-2">
 	<form action="?/addtocart" method="post">
-		<input id="username" value={$page.data.user.name} name="username" class="hidden" type="text">
+		<input id="username" value={$page.data.user?.name} name="username" class="hidden" type="text">
 		<input id="price" value={producto.price} name="price" class="hidden" type="text">
 		<input id="id" value={producto.id} name="id" class="hidden" type="text">
 		<input id="title" value={producto.title} name="title" class="hidden" type="text">
