@@ -90,7 +90,11 @@ export const Pay: Action = async ({ locals, request }) => {
 	          paid = True WHERE userid = ${user.id}
 	          AND paid = false`
 	);
-	return payment.id
+	console.log(payment.id)
+	return {
+		error:false,
+		id:payment.id
+	}
 };
 
 export const actions: Actions = { Pay };
