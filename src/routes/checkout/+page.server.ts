@@ -10,7 +10,8 @@ export const load: PageServerLoad = async ({ locals }) => {
             where:{
               user:{
                 username: locals.user.name
-              }
+              },
+              paid:false
             }
           }
         )

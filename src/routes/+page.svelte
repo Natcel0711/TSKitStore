@@ -46,7 +46,7 @@
 						<img
 							src={product.images[0]}
 							alt={product.description}
-							class="h-60 w-full object-cover object-center group-hover:opacity-75"
+							class="h-60 w-full object-fill object-center group-hover:opacity-75"
 						/>
 					</div>
 					<h3 class="mt-4 text-sm text-gray-700">{product.title}</h3>

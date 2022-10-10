@@ -11,7 +11,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 			where: {
 				user: {
 					username: locals.user.name
-				}
+				},
+				paid:false
 			}
 		});
 		return items;
@@ -21,7 +22,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const Pay: Action = async ({ locals }) => {
+export const Pay: Action = async ({ locals, request }) => {
+	const data = await request.formData()
 	const userarray = await db.$queryRaw<User[]>(
 		Prisma.sql`SELECT * FROM user WHERE username = ${locals.user.name}`
 	);
@@ -44,6 +46,7 @@ export const Pay: Action = async ({ locals }) => {
               paid = True WHERE userid = ${user.id} 
               AND paid = false`
 	);
+	return payment.id
 };
 
 export const actions: Actions = { Pay };

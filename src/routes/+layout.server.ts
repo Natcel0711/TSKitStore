@@ -9,7 +9,8 @@ export const load: LayoutServerLoad = async ({ locals }) => {
         where:{
           user:{
             username: locals.user.name
-          }
+          },
+          paid:false
         }
       }
     )
