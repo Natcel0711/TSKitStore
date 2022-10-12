@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data;
 	const { items } = data;
-	console.log(items)
+	console.log(items);
 </script>
 
 {#if items.length < 1}
