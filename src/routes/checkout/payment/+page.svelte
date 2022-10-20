@@ -4,7 +4,6 @@
 	export let data;
 	const { items } = data;
 	export let form: any;
-	console.log(form);
 </script>
 
 {#if form?.error == false}
@@ -21,7 +20,7 @@
 				<h1 class="text-3xl">Card details</h1>
 				<form action="?/Pay" id="PaymentForm" use:enhance method="POST">
 					<div class="form-control">
-						<label class="label">
+						<label for="" class="label">
 							<span class="label-text">Card Number</span>
 						</label>
 						<label class="input-group">
@@ -41,7 +40,7 @@
 						</label>
 					</div>
 					<div class="form-control">
-						<label class="label">
+						<label for="" class="label">
 							<span class="label-text">Exp. date</span>
 						</label>
 						<label class="input-group">
@@ -57,7 +56,7 @@
 						</label>
 					</div>
 					<div class="form-control">
-						<label class="label">
+						<label for="" class="label">
 							<span class="label-text">CVC Number</span>
 						</label>
 						<label class="input-group">
@@ -74,7 +73,7 @@
 						</label>
 					</div>
 					<div class="form-control">
-						<label class="label">
+						<label for="" class="label">
 							<span class="label-text">Name in card</span>
 						</label>
 						<label class="input-group">
