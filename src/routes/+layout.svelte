@@ -6,8 +6,9 @@
 	export let data;
 
 	let total: number = 0;
-	let itemscount: number = 0;
-
+	$: if ($cart_capacity === 0) {
+		total = 0;
+	}
 	async function CartTotal(items: Array<Checkout>) {
 		if (items !== undefined) {
 			for (let i = 0; i < items.length; i++) {
