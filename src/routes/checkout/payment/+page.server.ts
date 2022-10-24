@@ -1,5 +1,5 @@
 import type { Action, Actions, PageServerLoad } from './$types';
-
+import { z } from 'zod';
 import { db } from '$lib/database';
 import { Prisma } from '@prisma/client';
 import type { User } from '$lib/models/User';
@@ -21,53 +21,39 @@ export const load: PageServerLoad = async ({ locals }) => {
 		items: CartItems()
 	};
 };
-
+class Payment {
+	CardName: string | undefined;
+	CardNo: string | undefined;
+	CVC: string | undefined;
+	ExpDate: string | undefined;
+}
+const PaymentSchema = z.object({
+	CardName: z
+		.string({ required_error: 'Card name must be provided' })
+		.min(1, 'Must be at least 1 character')
+		.trim(),
+	CardNo: z
+		.string({ required_error: 'Card number must be provided' })
+		.length(16, 'Invalid card number')
+		.trim(),
+	CVC: z.string({ required_error: 'CVC must be provided' }).length(3, 'Invalid CVC'),
+	ExpDate: z.string({ required_error: 'Expire date is empty' }).min(1, 'No date detected').trim()
+});
 export const Pay: Action = async ({ locals, request }) => {
 	const data = await request.formData();
-	const CardName: string = data.get('CardName') as string;
-	const CardNo = data.get('CardNo') as string;
-	const CVC = data.get('CVC') as string;
-	const ExpDate = data.get('ExpDate') as string;
-	if (CardName.length < 2) {
-		return invalid(400, {
-			error: true,
-			message: 'Name should be longer than 1 character',
-			CardName,
-			CardNo,
-			CVC,
-			ExpDate
-		});
-	}
-	if (CardNo.length !== 16) {
-		return invalid(400, {
-			error: true,
-			message: 'Card number should be 16 digits',
-			CardName,
-			CardNo,
-			CVC,
-			ExpDate
-		});
-	}
-	if (CVC.length !== 3) {
-		return invalid(400, {
-			error: true,
-			message: 'CVC must be 3 digits',
-			CardName,
-			CardNo,
-			CVC,
-			ExpDate
-		});
-	}
-	if (!ExpDate) {
-		return invalid(400, {
-			error: true,
-			message: 'Must have expire date',
-			CardName,
-			CardNo,
-			CVC,
-			ExpDate
-		});
-	}
+	let pay_obj: Payment = new Payment();
+	pay_obj.CardName = data.get('CardName') as string;
+	pay_obj.CardNo = data.get('CardNo') as string;
+	pay_obj.CVC = data.get('CVC') as string;
+	pay_obj.ExpDate = data.get('ExpDate') as string;
+
+	try {
+		let result = PaymentSchema.parse(pay_obj);
+		console.log('success');
+		console.log(result);
+	} catch (error) {
+		console.log(error);
+	} /*
 	const userarray = await db.$queryRaw<User[]>(
 		Prisma.sql`SELECT * FROM user WHERE username = ${locals.user.name}`
 	);
@@ -90,11 +76,11 @@ export const Pay: Action = async ({ locals, request }) => {
 	          paid = True WHERE userid = ${user.id}
 	          AND paid = false`
 	);
-	console.log(payment.id)
+	console.log(payment.id);
 	return {
-		error:false,
-		id:payment.id
-	}
+		error: false,
+		id: payment.id
+	};*/
 };
 
 export const actions: Actions = { Pay };
