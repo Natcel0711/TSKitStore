@@ -54,7 +54,7 @@ export const Pay: Action = async ({ locals, request }) => {
 	} catch (error) {
 		console.log('Failed');
 		console.log(error);
-	} /*
+	}
 	const userarray = await db.$queryRaw<User[]>(
 		Prisma.sql`SELECT * FROM user WHERE username = ${locals.user.name}`
 	);
@@ -81,7 +81,7 @@ export const Pay: Action = async ({ locals, request }) => {
 	return {
 		error: false,
 		id: payment.id
-	};*/
+	};
 };
 
 export const actions: Actions = { Pay };
