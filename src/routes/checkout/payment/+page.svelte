@@ -36,6 +36,7 @@
 								name="CardNo"
 								placeholder="4242 4242 4242 4242"
 								class="input input-bordered"
+								title="xxx-xxxx-xxxx-xxxx"
 							/>
 						</label>
 					</div>
@@ -52,6 +53,7 @@
 								type="date"
 								placeholder="MM/YY"
 								class="input input-bordered"
+								title="please enter a valid exp. date"
 							/>
 						</label>
 					</div>
@@ -64,11 +66,14 @@
 							<input
 								required
 								name="CVC"
+								pattern="[0-9]+"
+								minlength="3"
 								maxlength="3"
 								value={form?.CVC ?? ''}
 								type="text"
 								placeholder="CVC"
 								class="input input-bordered"
+								title="please enter a valid cvc"
 							/>
 						</label>
 					</div>
@@ -84,6 +89,7 @@
 								value={form?.CardName ?? ''}
 								type="text"
 								class="input input-bordered"
+								title="please enter a valid name"
 							/>
 						</label>
 					</div>
@@ -95,7 +101,7 @@
 					<tbody>
 						{#each items as item}
 							<tr>
-								<th><img src={item.image} alt={item.description} /></th>
+								<th><img class="h-32" src={item.image} alt={item.description} /></th>
 								<td class="text-3xl">{item.name}</td>
 								<td class="text-3xl text-primary">${item.price}</td>
 								<td>

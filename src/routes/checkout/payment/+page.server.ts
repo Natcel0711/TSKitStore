@@ -52,6 +52,7 @@ export const Pay: Action = async ({ locals, request }) => {
 		console.log('success');
 		console.log(result);
 	} catch (error) {
+		console.log('Failed');
 		console.log(error);
 	} /*
 	const userarray = await db.$queryRaw<User[]>(
