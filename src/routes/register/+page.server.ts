@@ -46,6 +46,7 @@ const register: Action = async ({ request }) => {
 		console.log(`Register success: ${result}`);
 	} catch (ex) {
 		console.log(`Register error: ${ex}`);
+		return invalid(400, { invalid: true });
 	}
 	if (
 		typeof reg.username !== 'string' ||
